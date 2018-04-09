@@ -19,10 +19,12 @@ func main() {
 		if workspace == scratchpad {
 			ipcsocket.Command(fmt.Sprintf("[class=%s] focus", class))
 			ipcsocket.Command("move window to output HDMI-1")
+			ipcsocket.Command(fmt.Sprintf("[class=%s] focus", class))
 		} else if focused {
 			ipcsocket.Command("move scratchpad")
 		} else {
 			ipcsocket.Command(fmt.Sprintf("[class=%s] focus", class))
 		}
+		break
 	}
 }
