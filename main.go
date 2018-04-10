@@ -37,12 +37,14 @@ func ror(class string, cmd string) {
 	leaves := tree.Leaves()
 	found := false
 	for _, leaf := range leaves {
-		if leaf.Window_Properties.Class != class || leaf.Focused {
+		if leaf.Window_Properties.Class != class {
 			continue
 		} else if !leaf.Focused {
 			ipcsocket.Command(fmt.Sprintf("[id=%v] focus", leaf.Window))
 			found = true
 			break
+		} else {
+			found = leaf.Focused
 		}
 	}
 	if !found {
