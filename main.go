@@ -46,13 +46,15 @@ func ror(class string, cmd string) {
 		}
 	}
 	if !found {
-		exec.Command(cmd)
+		fmt.Println("Running app…")
+		cmd := exec.Command(cmd)
+		cmd.Start()
 	}
 }
 
 func main() {
 	fmt.Println(os.Args)
-	if os.Args[1] == "term" {
+	if len(os.Args) == 1 || os.Args[1] == "term" {
 		focusTerm()
 	} else if os.Args[1] == "ror" {
 		ror(os.Args[2], os.Args[3])
