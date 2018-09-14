@@ -4,6 +4,7 @@ import "github.com/mdirkse/i3ipc"
 import "fmt"
 import "os/exec"
 import "os"
+import "strings"
 
 var termClass string = "st-256color"
 var scratchpad string = "__i3_scratch"
@@ -49,6 +50,7 @@ func ror(class string, cmd string) {
 	}
 	if !found {
 		fmt.Println("Running app…")
+		fmt.Println(cmd)
 		cmd := exec.Command(cmd)
 		cmd.Start()
 	}
@@ -59,6 +61,6 @@ func main() {
 	if len(os.Args) == 1 || os.Args[1] == "term" {
 		focusTerm()
 	} else if os.Args[1] == "ror" {
-		ror(os.Args[2], os.Args[3])
+		ror(os.Args[2], strings.Join(os.Args[3:], ""))
 	}
 }
